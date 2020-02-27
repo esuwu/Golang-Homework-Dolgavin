@@ -1,1 +1,2 @@
-# Golang-Homework-Dolgavin
+# Golang-Homework 1
+Dolgavin Alexandr 
