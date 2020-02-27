@@ -10,12 +10,15 @@ import (
 	"strings"
 )
 
-var ignoreLetterCase = flag.Bool("f", false, "ignore word's letter case")
-var outputOnlyFirst = flag.Bool("u", false, "output only first value among equal")
-var inDescendingOrder = flag.Bool("r", false, "sort by descending order")
-var outputToFile = flag.String("o", "", "output to file")
-var onlyNumbers = flag.Bool("n", false, "sort only numbers")
-var byColumn = flag.Int("k", -1, "sort by column")
+
+var (
+	ignoreLetterCase = flag.Bool("f", false, "ignore word's letter case")
+	outputOnlyFirst = flag.Bool("u", false, "output only first value among equal")
+	inDescendingOrder = flag.Bool("r", false, "sort by descending order")
+	outputToFile = flag.String("o", "", "output to file")
+	onlyNumbers = flag.Bool("n", false, "sort only numbers")
+	byColumn = flag.Int("k", -1, "sort by column")
+)
 
 func makeUniqueByColumn(arrFile [][]string) [][]string{
 	for i, valI := range arrFile{
@@ -108,12 +111,11 @@ func sortByDefault(file []uint8) []string {
 			} else {
 				return numValI < numValJ
 			}
+		}
+		if *inDescendingOrder{
+			return arrFile[i] > arrFile[j]
 		} else {
-			if *inDescendingOrder{
-				return arrFile[i] > arrFile[j]
-			} else {
-				return arrFile[i] < arrFile[j]
-			}
+			return arrFile[i] < arrFile[j]
 		}
 	})
 	return arrFile
